@@ -6,8 +6,10 @@ import MyFooter from "../components/myFooter/myFooter";
 import UserItem from "../components/userItems/userItem";
 
 export default function Page() {
+
   const users = [
     {
+      id: 1,
       firstname: "John",
       lastname: "Doe",
       email: "johndoe@example.com",
@@ -18,6 +20,7 @@ export default function Page() {
       profilePicture: "/picture7.png"
     },
     {
+      id: 2,
       firstname: "Jane",
       lastname: "Smith",
       email: "janesmith@example.com",
@@ -25,9 +28,10 @@ export default function Page() {
       credit: 12,
       peopleHelped: 29,
       rating: 4.2,
-      profilePicture: "/picture2.png"
+      profilePicture: "/picture9.png"
     },
     {
+      id: 3,
       firstname: "Alice",
       lastname: "Johnson",
       email: "alicejohnson@example.com",
@@ -35,19 +39,21 @@ export default function Page() {
       credit: 18,
       peopleHelped: 41,
       rating: 4.7,
-      profilePicture: "/picture3.png"
+      profilePicture: "/picture8.png"
     },
     {
-      firstname: "Bobby",
+      id: 4,
+      firstname: "Bob",
       lastname: "Brown",
-      email: "bobbybrown@example.com",
+      email: "bobbrown@example.com",
       services: ["Consulting", "Market Research", "Branding"],
       credit: 10,
       peopleHelped: 36,
       rating: 4.0,
-      profilePicture: "/picture4.png"
+      profilePicture: "/picture10.png"
     },
     {
+      id: 5,
       firstname: "Eva",
       lastname: "Green",
       email: "evagreen@example.com",
@@ -58,6 +64,7 @@ export default function Page() {
       profilePicture: "/picture5.png"
     },
     {
+      id: 6,
       firstname: "Mike",
       lastname: "Ross",
       email: "mikeross@example.com",

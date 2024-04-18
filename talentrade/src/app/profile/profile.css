@@ -1,0 +1,63 @@
+#profile {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  margin: 15vh 5vw;
+}
+
+.profileNav {
+  display: flex;
+  flex-direction: row;
+}
+
+.profileH2 {
+  text-decoration: underline;
+  margin-right: 2vw;
+  padding: 1vh 2vw;
+}
+
+.profileH2:hover {
+  cursor: pointer;
+}
+
+.profileShow {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(221, 35, 30, 1);
+}
+
+#profileRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profileImg {
+  width: 15vw;
+  border-radius: 1000px;
+}
+
+#profileParag {
+  width: 20vw;
+  color: rgba(221, 35, 30, 0.9);
+}
+
+#profileStats {
+  width: 20vw;
+  height: fit-content;
+  border: 2px solid black;
+  padding: 2vh 2vw;
+  box-shadow: 0 10px 5px rgb(180, 180, 180);
+  display: flex;
+  flex-direction: column;
+}
+
+#profileStats h2 {
+  color: rgba(221, 35, 30, 1);
+}
+
+#profileStats h5 {
+  margin: 1vh 0;
+}
+
+#profileStats h5 span {
+  color: rgba(221, 35, 30, 0.9);
+}

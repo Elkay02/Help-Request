@@ -19,13 +19,13 @@ export function Register({ onClose }: AuthComponentProps) {
         <h1 className='authTitle'>Welcome to TalenTrade!</h1>
         <form className='authForm' onSubmit={handleSubmit}>
           <input type="text" className='authInput' placeholder='firstname' />
-          <hr />
+          <hr className='authHr' />
           <input type="text" className='authInput' placeholder='lastname' />
-          <hr />
+          <hr className='authHr' />
           <input type="text" className='authInput' placeholder='email' />
-          <hr />
+          <hr className='authHr' />
           <input type="text" className='authInput' placeholder='password' />
-          <hr />
+          <hr className='authHr' />
           <div id='authSubmits'>
             <div>
               <button className='authButton' onClick={(event) => {
@@ -61,9 +61,9 @@ export function LogIn({ onClose }: AuthComponentProps) {
         <h1 className='authTitle'>Welcome back!</h1>
         <form className='authForm' onSubmit={handleSubmit}>
           <input type="text" className='authInput' placeholder='email' />
-          <hr />
+          <hr className='authHr' />
           <input type="text" className='authInput' placeholder='password' />
-          <hr />
+          <hr className='authHr' />
           <button type='submit' className='authButton authSubmit'>Submit</button>
         </form>
       </div>

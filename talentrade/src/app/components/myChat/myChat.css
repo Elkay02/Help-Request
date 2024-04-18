@@ -1,0 +1,25 @@
+#myChartUl {
+  padding: 0 2vw;
+}
+
+.myChartIl {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2vh 0;
+}
+
+.myChartIl img {
+  width: 4vw;
+  height: 4vw;
+  margin-right: 2vw;
+  border-radius: 1000px;
+}
+
+.myChartHr {
+  width: 100%;
+  background-color: black;
+  border: 0;
+  height: 1px;
+}

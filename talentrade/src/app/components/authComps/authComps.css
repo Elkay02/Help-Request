@@ -68,7 +68,7 @@
   align-self: end;
 }
 
-hr {
+.authHr {
   width: 100%;
   background-color: white;
   border: 0;
