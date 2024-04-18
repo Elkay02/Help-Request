@@ -1,0 +1,23 @@
+.authBckgrnd {
+  background-color: rgba(0, 0, 0, .5);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+}
+
+.auth,
+.authForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth {
+  width: 33vw;
+  padding: 2vh 1vw;
+  background-color: rgba(221, 30, 35, 1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

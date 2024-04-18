@@ -1,0 +1,49 @@
+#myFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1vh 2vw;
+  background-color: rgba(221, 30, 35, 0.9);
+  margin-top: 3vh;
+}
+
+#footerLinks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.footerCol {
+  margin-right: 3vw;
+}
+
+.footerH5 {
+  color: white;
+  font-weight: 300;
+}
+
+.footerH5:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+.footerIcons {
+  color: rgba(221, 30, 35, 0.9);
+  background-color: white;
+  font-size: 5vh;
+  padding: 10px;
+  border-radius: 50px;
+  margin-left: 2vw;
+  margin-top: 1vw;
+}
+
+.footerIcons:hover {
+  color: white;
+  background-color: rgba(221, 30, 35, 0.9);
+  cursor: pointer;
+}
+
+#footerH1 {
+  text-align: right;
+  color: white;
+}

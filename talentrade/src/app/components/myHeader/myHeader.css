@@ -1,0 +1,30 @@
+#myHeader {
+  width: 100vw;
+  padding: 0 2vw;
+  justify-content: space-between;
+  box-shadow: 0 0 10px black;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  height: 8vh;
+}
+
+#myHeader,
+#headerNav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#headerNav {
+  width: 33%;
+  justify-content: space-around;
+}
+
+.headerRed {
+  color: rgba(221, 30, 35, 1);
+}
+
+.headerH3:hover {
+  cursor: pointer;
+}
