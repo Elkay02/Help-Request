@@ -3,6 +3,7 @@ import { IoSearch } from "react-icons/io5";
 import './results.css'
 import { FaSortAmountDown } from "react-icons/fa";
 import MyFooter from "../components/myFooter/myFooter";
+import UserItem from "../components/userItems/userItem";
 
 export default function Page() {
   const users = [
@@ -14,7 +15,7 @@ export default function Page() {
       credit: 15,
       peopleHelped: 34,
       rating: 4.5,
-      profilePicture: "/picture1.png"
+      profilePicture: "/picture7.png"
     },
     {
       firstname: "Jane",
@@ -72,26 +73,30 @@ export default function Page() {
 
   return (
     <>
-      <div className="mainSearch">
-        <input type="text" placeholder="Search..." className="mainInput" />
+      <div className="resultsSearch">
+        <input type="text" placeholder="Search..." className="resultsInput" />
         <Link href="/results">
-          <IoSearch className="mainIcon" />
+          <IoSearch className="resultsIcon" />
         </Link>
       </div>
-      <div>
+      <div id="resultTopTxt">
         <h1>TOP RESULTS</h1>
-        <FaSortAmountDown />
+        <h2>SORT <FaSortAmountDown /></h2>
       </div>
-      {/* people */}
-      <h1>l</h1>
-      <h1>l</h1>
-      <h1>l</h1>
-      <h1>l</h1>
-      <h1>l</h1>
-      <h1>l</h1>
-      <h1>l</h1>
-      <h1>l</h1>
-      <button>Load More</button>
+      <div id="resultsUsers">
+        {users.map((user, index) => {
+          return <UserItem
+            key={index}
+            firstname={user.firstname}
+            lastname={user.lastname}
+            service={user.services[0]}
+            rating={user.rating}
+            profile={user.profilePicture}
+            helped={user.peopleHelped}
+          />
+        })}
+      </div>
+      <button id="resultsButton">Load More</button>
       <MyFooter />
     </>
   );

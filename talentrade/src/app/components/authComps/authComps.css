@@ -1,9 +1,10 @@
 .authBckgrnd {
   background-color: rgba(0, 0, 0, .5);
   position: fixed;
+  /* margin-top: -7vh; */
   width: 100vw;
   height: 100vh;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .auth,
@@ -17,7 +18,59 @@
   padding: 2vh 1vw;
   background-color: rgba(221, 30, 35, 1);
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.authTitle {
+  color: white;
+}
+
+.authInput {
+  border: 0;
+  margin: 1vh 0 0.5vh 0;
+  font-size: 2.5vh;
+  padding: 5px;
+  color: rgba(221, 30, 35, 1);
+}
+
+.authInput::placeholder {
+  color: rgba(221, 30, 35, 1);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.authInput:focus {
+  outline: none;
+}
+
+#authSubmits {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.authButton {
+  border: 0;
+  background-color: white;
+  color: rgba(221, 30, 35, 1);
+  padding: 1vh;
+  font-size: 2vh;
+}
+
+.authButton:hover {
+  cursor: pointer;
+}
+
+.authsubmit {
+  width: 15%;
+  align-self: end;
+}
+
+hr {
+  width: 100%;
+  background-color: white;
+  border: 0;
+  height: 1px;
 }
