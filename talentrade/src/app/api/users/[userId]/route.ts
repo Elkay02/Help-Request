@@ -1,31 +1,21 @@
-import { connectToDatabase } from '../../../../../lib';
+import { connectToDatabase } from './../../../../../lib/index';
 import { NextResponse } from "next/server";
 
-interface UserData {
-  email: string;
-  password: string;
-}
 
 
-export async function POST(req: Request) {
+export async function GET(req: Request, context: any) {
   try {
-    const data = await req.json()
-    const { email, password } = data;
-
+    const { params } = context;
     const { db } = await connectToDatabase();
     const userCollection = db.collection("users");
 
-    const user = await userCollection.findOne({
-      $and: [
-        { email: email },
-        { password: password }
-      ]
-    });
+    const users = await userCollection.find().toArray()
+    console.log('GET ~ users:', users);
+    const user = users.filter((user: { _id: { toString: () => any; }; }) => params.userId === user._id.toString());  // Example query
+    console.log('GET ~ user:', user);
 
-    return new NextResponse(JSON.stringify(user), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
+
+    return NextResponse.json(user);
   } catch (error) {
     console.error('Error details:', error);
     if (error instanceof Error) {

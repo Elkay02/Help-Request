@@ -8,7 +8,7 @@ import UserItem from "../components/userItems/userItem";
 import React, { useEffect, useState } from 'react';
 
 type User = {
-  id: number;
+  _id: string;
   firstname: string;
   lastname: string;
   email: string;
@@ -55,8 +55,9 @@ export default function Page() {
       <div id="resultsUsers">
         {
           users.map((user: User) => {
+
             return <UserItem
-              key={user.id}
+              id={user._id.toString()}
               firstname={user.firstname}
               lastname={user.lastname}
               service={user.services ? user.services[0] : undefined}
