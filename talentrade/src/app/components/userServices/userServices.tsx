@@ -1,6 +1,6 @@
 import './userService.css'
 
-export default function UserServices() {
+export default function UserServices({ services }: { services: string[] }) {
   return (
     <div className='profileCopmsContainer'>
       <ul id='myServicestUl'>

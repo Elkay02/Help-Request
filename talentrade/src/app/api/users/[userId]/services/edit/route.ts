@@ -1,20 +1,37 @@
 import { ObjectId } from 'mongodb';
-import { connectToDatabase } from './../../../../../lib/index';
+import { connectToDatabase } from '../../../../../../../lib/index';
 import { NextResponse } from "next/server";
 
+interface Service {
+  service: string;
+  // tags: string[];
+}
 
-
-export async function GET(req: Request, context: any) {
+export async function PUT(req: Request, context: any) {
   try {
+    const data = await req.json()
     const { params } = context;
+
+    const { service, index } = data;
+
     const { db } = await connectToDatabase();
+
     const userCollection = db.collection("users");
 
+    // Convert params.userId to ObjectId
     const userId = new ObjectId(params.userId);
 
-    const user = await userCollection.findOne({ _id: userId })
+    // Update the array field using $push
+    const updatedUser = await userCollection.findOneAndUpdate(
+      { _id: userId },
+      { $set: { [`services.${index}`]: service } },
+      { returnOriginal: false } // To return the updated document
+    );
 
-    return NextResponse.json(user);
+    return new NextResponse(JSON.stringify(updatedUser), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
   } catch (error) {
     console.error('Error details:', error);
     if (error instanceof Error) {

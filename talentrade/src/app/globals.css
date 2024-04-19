@@ -3,22 +3,28 @@
   box-sizing: border-box;
 }
 
-/* html {
-  box-sizing: border-box;
-} */
+html {
+  height: 100%;
+}
 
 body {
   margin: 0;
+  height: fit-content;
 }
 
 .profileCopmsContainer {
   width: 100%;
-  height: fit-content;
+  height: 55vh;
   border: 2px solid black;
   padding: 2vh 2vw;
   box-shadow: 0 10px 5px rgb(180, 180, 180);
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+}
+
+.profileCopmsContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .profileCopmsButton {

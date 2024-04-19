@@ -15,7 +15,7 @@ export default function Page({ params }: { params: { id: string } }) {
     firstname: "default",
     lastname: "default",
     profilePicture: "/default.png",
-    services: [],
+    services: ['service 1'],
     credit: 0,
     peopleHelped: 0,
     rating: 0,
@@ -29,7 +29,7 @@ export default function Page({ params }: { params: { id: string } }) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data = await res.json();
-        setUser(data[0]);
+        setUser(prevUser => ({ ...prevUser, ...data }));
       } catch (error) {
         console.error('Failed to fetch users:', error);
       }
@@ -37,7 +37,6 @@ export default function Page({ params }: { params: { id: string } }) {
     fetchUser(id);
   }, []);
 
-  console.log('Page ~ user:', user);
 
 
   return (
@@ -53,7 +52,7 @@ export default function Page({ params }: { params: { id: string } }) {
               <h2 className={!showChat ? 'profileH2 profileShow' : 'profileH2 profileHide'} onClick={() => { setShowChat(false) }}>My Services</h2>
             </div>
             {showChat && <MyChat />}
-            {!showChat && <MyServices />}
+            {!showChat && <MyServices services={user.services} id={id} />}
           </>
         }
         {!isMyProfile &&
@@ -63,7 +62,7 @@ export default function Page({ params }: { params: { id: string } }) {
               <h2 className={!showChat ? 'profileH2 profileShow' : 'profileH2 profileHide'} onClick={() => { setShowChat(false) }}>Services</h2>
             </div>
             {showChat && <UserChat />}
-            {!showChat && <UserServices />}
+            {!showChat && <UserServices services={user.services} />}
           </>
         }
       </div>
