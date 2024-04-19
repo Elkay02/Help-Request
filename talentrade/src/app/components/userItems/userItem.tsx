@@ -1,9 +1,9 @@
 import './userItem.css'
 
-export default function UserItem({ firstname, lastname, service, rating, profile, helped }: {
+export default function UserItem({ firstname = "L", lastname = "K", service = "No Services Yet", rating = 0, profile = "/default.png", helped = 0 }: {
   firstname: string;
   lastname: string;
-  service: string;
+  service: string | undefined;
   rating: number;
   profile: string;
   helped: number;

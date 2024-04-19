@@ -39,7 +39,6 @@ export default function Page() {
 
     fetchUsers();
   }, []);
-  console.log('{users.map ~ users:', users);
 
   return (
     <>
@@ -60,7 +59,7 @@ export default function Page() {
               key={user.id}
               firstname={user.firstname}
               lastname={user.lastname}
-              service={user.services[0]}
+              service={user.services ? user.services[0] : undefined}
               rating={user.rating}
               profile={user.profilePicture}
               helped={user.peopleHelped}
