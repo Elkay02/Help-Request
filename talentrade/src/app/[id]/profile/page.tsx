@@ -51,7 +51,7 @@ export default function Page({ params }: { params: { id: string } }) {
               <h2 className={showChat ? 'profileH2 profileShow' : 'profileH2 profileHide'} onClick={() => { setShowChat(true) }}>Chat History</h2>
               <h2 className={!showChat ? 'profileH2 profileShow' : 'profileH2 profileHide'} onClick={() => { setShowChat(false) }}>My Services</h2>
             </div>
-            {showChat && <MyChat />}
+            {showChat && <MyChat id={id} />}
             {!showChat && <MyServices services={user.services} id={id} />}
           </>
         }
@@ -61,7 +61,7 @@ export default function Page({ params }: { params: { id: string } }) {
               <h2 className={showChat ? 'profileH2 profileShow' : 'profileH2 profileHide'} onClick={() => { setShowChat(true) }}>Chat</h2>
               <h2 className={!showChat ? 'profileH2 profileShow' : 'profileH2 profileHide'} onClick={() => { setShowChat(false) }}>Services</h2>
             </div>
-            {showChat && <UserChat />}
+            {showChat && <UserChat id={id} />}
             {!showChat && <UserServices services={user.services} />}
           </>
         }
