@@ -1,11 +1,6 @@
 import { connectToDatabase } from '../../../../../lib';
 import { NextResponse } from "next/server";
-
-interface UserData {
-  email: string;
-  password: string;
-}
-
+import bcrypt from 'bcrypt';
 
 export async function POST(req: Request) {
   try {
@@ -15,12 +10,12 @@ export async function POST(req: Request) {
     const { db } = await connectToDatabase();
     const userCollection = db.collection("users");
 
-    const user = await userCollection.findOne({
-      $and: [
-        { email: email },
-        { password: password }
-      ]
-    });
+    const user = await userCollection.findOne({ email: email });
+    if (!user) throw new Error("Email not found!");
+
+    const validatedPass = await bcrypt.compare(password, user.password);
+    if (!validatedPass) throw new Error("Incorrect Password!");
+
 
     return new NextResponse(JSON.stringify(user), {
       status: 200,

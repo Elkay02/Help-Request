@@ -32,7 +32,7 @@ export default function MyChat({ id }: { id: string }) {
             <>
               <li className='myChartIl'>
                 <img src="/picture9.png" alt="small profile" />
-                <h4>{msg.request}h</h4>
+                <h4>{msg.request}</h4>
               </li>
               <hr className='myChartHr' />
             </>
