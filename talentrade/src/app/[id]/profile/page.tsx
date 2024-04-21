@@ -9,7 +9,8 @@ import UserServices from "../../components/userServices/userServices";
 
 export default function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  const [isMyProfile, setIsMyProfile] = useState(true)
+  const adminId = "66214dd28aa8898405626c1a";
+  const [isMyProfile, setIsMyProfile] = useState(adminId === id)
   const [showChat, setShowChat] = useState(true)
   const [user, setUser] = useState({
     firstname: "default",
@@ -67,7 +68,7 @@ export default function Page({ params }: { params: { id: string } }) {
         }
       </div>
       <div id="profileRight">
-        <img src={user.profilePicture} alt="User Profile" onClick={() => { setIsMyProfile(!isMyProfile) }} id='profileImg' />
+        <img src={user.profilePicture} alt="User Profile" id='profileImg' />
         <p id="profileParag">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem neque voluptatem iusto vero modi qui ullam voluptate odit, enim eveniet delectus incidunt, eum autem eaque temporibus adipisci velit ipsam. Praesentium?</p>
         <div id='profileStats'>
           <h2>Statistics</h2>

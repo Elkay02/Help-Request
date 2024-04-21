@@ -22,7 +22,6 @@ export default function UserChat({ id }: { id: string }) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log('handleSubmit ~ user:', data);
     } catch (error) {
       console.error('Error posting message:', error);
       // Handle error or provide feedback to the user

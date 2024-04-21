@@ -1,6 +1,9 @@
 import { connectToDatabase } from '../../../../../lib';
 import { NextResponse } from "next/server";
+import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt';
+
+const AUTH_KEY = process.env.AUTH_KEY;
 
 interface UserData {
   firstname: string;
@@ -59,10 +62,19 @@ export async function POST(req: Request) {
     // Insert user data into the database
     const user = await userCollection.insertOne(userData);
 
-    // Return success response
-    return new NextResponse(JSON.stringify(user), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
+    // const { _id } = await user.save();
+
+    if (!AUTH_KEY) {
+      return new NextResponse(JSON.stringify({ error: "Authentication key is not defined" }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const accessToken = jwt.sign({ _id: user.insertedId }, AUTH_KEY);
+
+    return new NextResponse(JSON.stringify({ accessToken }), {
+      status: 201
     });
   } catch (error) {
     // Handle errors

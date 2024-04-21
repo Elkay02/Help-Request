@@ -40,7 +40,6 @@ export function Register({ onClose }: AuthComponentProps) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log('handleSubmit ~ user:', data);
       onClose();
     } catch (error) {
       console.error('Error posting message:', error);
@@ -147,7 +146,6 @@ export function LogIn({ onClose }: AuthComponentProps) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log('handleSubmit ~ user:', data);
       onClose();
     } catch (error) {
       console.error('Error posting message:', error);

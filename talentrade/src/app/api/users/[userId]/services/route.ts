@@ -13,7 +13,6 @@ export async function PUT(req: Request, context: any) {
     const { params } = context;
 
     const { service } = data;
-    console.log('PUT ~ service:', service);
 
     const { db } = await connectToDatabase();
 

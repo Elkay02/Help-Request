@@ -4,7 +4,6 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 export default function MyServices({ services, id }: { services: string[], id: string }) {
-  console.log('MyServices ~ services:', services);
   const [service, setService] = useState('new service');
   const [updatedServices, setUpdatedServices] = useState<string[]>(services);
 

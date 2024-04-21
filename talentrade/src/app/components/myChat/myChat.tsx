@@ -14,8 +14,7 @@ export default function MyChat({ id }: { id: string }) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data = await res.json();
-        console.log('fetchMessages ~ data:', data);
-        setMessages(data.filter((msg: any) => msg.receiverId));
+        setMessages(data.filter((msg: any) => msg.receiverId === id));
       } catch (error) {
         console.error('Failed to fetch Messages:', error);
       }
