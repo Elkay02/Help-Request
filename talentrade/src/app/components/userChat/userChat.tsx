@@ -4,7 +4,7 @@ import './userChat.css'
 export default function UserChat({ id }: { id: string }) {
 
   const [request, setRequest] = useState('');
-  const receiverId = '66214dd28aa8898405626c1a'
+  const receiverId = '662624f03119c7fe982964e6'
   const senderId = id
 
   async function handleSend(e: any) {

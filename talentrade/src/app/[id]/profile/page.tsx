@@ -9,7 +9,7 @@ import UserServices from "../../components/userServices/userServices";
 
 export default function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  const adminId = "66214dd28aa8898405626c1a";
+  const adminId = "662624f03119c7fe982964e6";
   const [isMyProfile, setIsMyProfile] = useState(adminId === id)
   const [showChat, setShowChat] = useState(true)
   const [user, setUser] = useState({

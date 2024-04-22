@@ -17,6 +17,7 @@ export async function PUT(req: Request, context: any) {
     const { db } = await connectToDatabase();
 
     const userCollection = db.collection("users");
+    const serviceCollection = db.collection("services");
 
     // Convert params.userId to ObjectId
     const userId = new ObjectId(params.userId);
@@ -27,6 +28,31 @@ export async function PUT(req: Request, context: any) {
       { $push: { services: service } },
       { returnOriginal: false } // To return the updated document
     );
+
+    const isService = await serviceCollection.findOne({ service: service })
+    console.log('PUT ~ isService:', isService);
+
+    if (isService) {
+      console.log('PUT ~ isService passed');
+      const updateService = await serviceCollection.findOneAndUpdate(
+        { service: service },
+        { $push: { users: userId } },
+        { returnOriginal: false }
+      )
+      console.log('PUT ~ isService:', updateService);
+      return new NextResponse(JSON.stringify(updateService), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } else {
+      const newService = await serviceCollection.insertOne(
+        { service: service, users: [userId] }
+      );
+      return new NextResponse(JSON.stringify(newService), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
 
     return new NextResponse(JSON.stringify(updatedUser), {
       status: 200,

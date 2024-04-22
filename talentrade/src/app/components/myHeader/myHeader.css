@@ -17,6 +17,12 @@
   align-items: center;
 }
 
+#headerTitle {
+  color: black;
+  text-decoration: none;
+
+}
+
 #headerNav {
   width: 33%;
   justify-content: space-around;
@@ -24,8 +30,14 @@
 
 .headerRed {
   color: rgba(221, 30, 35, 1);
+  text-decoration: none;
 }
 
 .headerH3:hover {
   cursor: pointer;
+}
+
+#headerImg {
+  width: 3vw;
+  border-radius: 100px;
 }

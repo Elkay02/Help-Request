@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import './authComps.css'
 
-interface AuthComponentProps {
+interface RegisterProps {
   onClose: () => void;
+  setIs: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const RegisterState = {
@@ -12,7 +13,7 @@ const RegisterState = {
   password: '',
 };
 
-export function Register({ onClose }: AuthComponentProps) {
+export function Register({ onClose, setIs }: RegisterProps) {
 
   const [regState, setRegState] = useState(RegisterState);
 
@@ -40,8 +41,10 @@ export function Register({ onClose }: AuthComponentProps) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      setIs(true);
       onClose();
     } catch (error) {
+      alert(error)
       console.error('Error posting message:', error);
       // Handle error or provide feedback to the user
     }
@@ -117,7 +120,7 @@ const LogInState = {
   password: '',
 };
 
-export function LogIn({ onClose }: AuthComponentProps) {
+export function LogIn({ onClose, setIs }: RegisterProps) {
 
   const [logInState, setLogInState] = useState(LogInState);
 
@@ -146,6 +149,7 @@ export function LogIn({ onClose }: AuthComponentProps) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      setIs(true);
       onClose();
     } catch (error) {
       console.error('Error posting message:', error);

@@ -5,7 +5,7 @@ export default function UserItem({ id, firstname = "L", lastname = "K", service 
   id: string;
   firstname: string;
   lastname: string;
-  service: string | undefined;
+  service: any;
   rating: number;
   profile: string;
   helped: number;

@@ -17,11 +17,15 @@ export async function DELETE(req: Request, context: any) {
     const { db } = await connectToDatabase();
 
     const userCollection = db.collection("users");
+    const serviceCollection = db.collection("services");
 
     // Convert params.userId to ObjectId
     const userId = new ObjectId(params.userId);
     const user = await userCollection.findOne({ _id: userId })
+    const service = user.services[index]
+    console.log('DELETE ~ service:', service);
     user.services.splice(index, 1)
+
     // Update the array field using $push
     const updatedUser = await userCollection.findOneAndUpdate(
       { _id: userId },
@@ -29,7 +33,13 @@ export async function DELETE(req: Request, context: any) {
       { returnOriginal: false } // To return the updated document
     );
 
-    return new NextResponse(JSON.stringify(updatedUser), {
+    const updatedService = await serviceCollection.findOneAndUpdate(
+      { service: service },
+      { $pull: { users: userId } },
+      { returnOriginal: false } // To return the updated document
+    );
+
+    return new NextResponse(JSON.stringify(updatedService), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
