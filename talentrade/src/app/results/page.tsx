@@ -6,7 +6,7 @@ import { FaSortAmountDown } from "react-icons/fa";
 import MyFooter from "../components/myFooter/myFooter";
 import UserItem from "../components/userItems/userItem";
 import React, { useEffect, useState } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { similarity } from "../utils/search";
 
 type User = {
@@ -30,7 +30,14 @@ type Service = {
 
 export default function Page() {
 
+  const router = useRouter();
   const [newSearch, setNewSearch] = useState('');
+
+  const handleSearch = () => {
+    const queryString = new URLSearchParams({ q: newSearch }).toString(); // Construct query string
+    const url = `/results?${queryString}`; // Construct URL string
+    router.push(url); // Push the URL
+  };
 
   const [userIds, setUserIds] = useState<string[]>([]);
   const [users, setUsers] = useState<User[]>([]);
@@ -47,7 +54,7 @@ export default function Page() {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data = await res.json();
-        const filteredData = data.filter((service: Service) => similarity(search, service.service) > 0.4)
+        const filteredData = data.filter((service: Service) => similarity(search, service.service) > 0.35)
         setServices(filteredData);
         const resultUsers = filteredData
           .map((service: Service) => service.users)
@@ -93,9 +100,7 @@ export default function Page() {
     <>
       <div className="resultsSearch">
         <input type="text" placeholder="Search..." className="resultsInput" value={newSearch} onChange={(e) => { setNewSearch(e.target.value) }} />
-        <Link href={`/result?q=${newSearch}`}>
-          <IoSearch className="resultsIcon" />
-        </Link>
+        <IoSearch className="resultsIcon" onClick={handleSearch} />
       </div>
       <div id="resultTopTxt">
         <h1>TOP RESULTS</h1>
@@ -104,7 +109,8 @@ export default function Page() {
       <div id="resultsUsers">
         {
           users.map((user: User) => {
-            let serv = services.filter(service => service.users.includes(user._id))[0].service
+            let filtServ = services.filter(service => service.users.includes(user._id))
+            let serv = filtServ.length ? filtServ[0].service : user.services[0]
             return <UserItem
               id={user._id.toString()}
               firstname={user.firstname}

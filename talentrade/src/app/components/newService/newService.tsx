@@ -1,70 +1,76 @@
 import { useState } from 'react';
 import './newService.css'
 
-export function NewService() {
+export function NewService({ isAdd, id, index, set }: { isAdd: boolean, id: string, index: number, set: any }) {
 
-  // const [logInState, setLogInState] = useState(LogInState);
+  const [service, setService] = useState('');
 
-  // const handleChange = (e: any) => {
-  //   const { name, value } = e.target;
-  //   setLogInState((logInState) => ({
-  //     ...logInState,
-  //     [name]: value,
-  //   }));
-  // };
+  const handleChange = (e: any) => {
+    setService(e.target.value);
+  };
 
-  // async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (isAdd) handleAdd();
+    else handleEdit(index);
+    set(false)
+  }
 
-  //   e.preventDefault();
-  //   const { email, password } = logInState;
-  //   const user = { email, password };
+  async function handleAdd() {
+    try {
+      const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ service })
+      };
+      const response = await fetch(`http://localhost:3000/api/users/${id}/services`, requestOptions);
+      if (!response.ok) {
 
-  //   try {
-  //     const requestOptions = {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify(user)
-  //     };
-  //     const response = await fetch('http://localhost:3000/api/users/login', requestOptions);
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     const data = await response.json();
-  //     console.log('handleSubmit ~ user:', data);
-  //   } catch (error) {
-  //     console.error('Error posting message:', error);
-  //     // Handle error or provide feedback to the user
-  //   }
-  // }
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error adding service:', error);
+    }
+    setService('');
+  }
 
-  // return (
-  //   <div className='authBckgrnd'>
-  //     <div className='auth'>
-  //       <h1 className='authTitle'>Welcome back!</h1>
-  //       <form className='authForm' onSubmit={handleSubmit}>
-  //         <input
-  //           type="text"
-  //           className='authInput'
-  //           placeholder='email'
-  //           name='email'
-  //           value={logInState.email}
-  //           onChange={handleChange}
-  //           required
-  //         />
-  //         <hr className='authHr' />
-  //         <input
-  //           type="password"
-  //           className='authInput'
-  //           placeholder='password'
-  //           name='password'
-  //           value={logInState.password}
-  //           onChange={handleChange}
-  //           required
-  //         />
-  //         <hr className='authHr' />
-  //         <button type='submit' className='authButton authSubmit'>Submit</button>
-  //       </form>
-  //     </div>
-  //   </div>
-  // );
+  async function handleEdit(index: number) {
+    const servicePut = { service, index };
+
+    try {
+      const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(servicePut)
+      };
+      const response = await fetch(`http://localhost:3000/api/users/${id}/services/edit`, requestOptions);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error updating service:', error);
+    }
+    setService('');
+  }
+
+  return (
+    <div className='newServBckgrnd'>
+      <div className='newServ'>
+        <h1 className='newServTitle'>{isAdd ? 'Add a New Service' : 'Edit Your Service'}</h1>
+        <form className='newServForm' onSubmit={handleSubmit}>
+          <input
+            type="text"
+            className='newServInput'
+            placeholder='Service'
+            name='service'
+            value={service}
+            onChange={handleChange}
+            required
+          />
+          <hr className='newServHr' />
+          <button type='submit' className='newServButton newServSubmit'>Submit</button>
+        </form>
+      </div>
+    </div>
+  );
 }

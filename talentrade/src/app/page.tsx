@@ -2,7 +2,7 @@
 import styles from "./page.module.css";
 import { IoSearch } from "react-icons/io5";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
@@ -10,10 +10,9 @@ export default function Home() {
   const [search, setSearch] = useState('');
 
   const handleSearch = () => {
-    router.push({
-      pathname: "/results",
-      query: { q: search }
-    });
+    const queryString = new URLSearchParams({ q: search }).toString(); // Construct query string
+    const url = `/results?${queryString}`; // Construct URL string
+    router.push(url); // Push the URL
   };
 
   return (
