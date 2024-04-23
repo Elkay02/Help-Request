@@ -1,0 +1,16 @@
+#sortOverlay {
+  position: absolute;
+  top: 32vh;
+  right: 2vw;
+  background-color: rgba(226, 226, 226, 1);
+  /* width: 7vw;
+  height: 15vh; */
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+#sortOverlay h3:hover {
+  color: rgba(221, 35, 30, 1);
+  cursor: pointer;
+}

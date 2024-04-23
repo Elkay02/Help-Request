@@ -8,6 +8,7 @@ import UserItem from "../components/userItems/userItem";
 import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { similarity } from "../utils/search";
+import SortOverlay from "../components/sortOverlay/sortOverlay";
 
 type User = {
   _id: string;
@@ -32,6 +33,8 @@ export default function Page() {
 
   const router = useRouter();
   const [newSearch, setNewSearch] = useState('');
+  const [showSort, setShowSort] = useState(false);
+  const [sortCategory, setSortCategory] = useState('');
 
   const handleSearch = () => {
     const queryString = new URLSearchParams({ q: newSearch }).toString(); // Construct query string
@@ -84,7 +87,19 @@ export default function Page() {
         }
         const data = await res.json();
 
-        const filteredUsers = data.filter((user: User) => userIds.includes(user._id));
+        let filteredUsers = data.filter((user: User) => userIds.includes(user._id));
+        switch (sortCategory) {
+          case 'rating':
+            filteredUsers = filteredUsers.sort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating)
+            break;
+
+          case 'people':
+            filteredUsers = filteredUsers.sort((a: { peopleHelped: number; }, b: { peopleHelped: number; }) => b.peopleHelped - a.peopleHelped)
+            break;
+
+          default:
+            break;
+        }
         setUsers(filteredUsers);
       } catch (error) {
         console.error('Failed to fetch users:', error);
@@ -93,7 +108,7 @@ export default function Page() {
 
     fetchUsers();
 
-  }, [userIds]);
+  }, [userIds, sortCategory]);
 
 
   return (
@@ -104,7 +119,8 @@ export default function Page() {
       </div>
       <div id="resultTopTxt">
         <h1>TOP RESULTS</h1>
-        <h2>SORT <FaSortAmountDown /></h2>
+        <h2 onClick={() => { setShowSort(!showSort) }}>SORT <FaSortAmountDown /></h2>
+        {showSort && <SortOverlay setCat={setSortCategory} setShow={setShowSort} />}
       </div>
       <div id="resultsUsers">
         {

@@ -32,11 +32,19 @@
   font-size: 5vh;
 }
 
+.resultsIcon:hover {
+  cursor: pointer;
+}
+
 #resultTopTxt {
   margin: 1vh 2vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+#resultTopTxt h2:hover {
+  cursor: pointer;
 }
 
 #resultsUsers {

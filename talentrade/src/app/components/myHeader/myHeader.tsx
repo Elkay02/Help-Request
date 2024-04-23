@@ -8,7 +8,6 @@ export default function MyHeader() {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showLogIn, setShowLogIn] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log('MyHeader ~ isLoggedIn:', isLoggedIn);
 
   const toggleSignUp = () => setShowSignUp(!showSignUp);
   const toggleLogIn = () => setShowLogIn(!showLogIn);
