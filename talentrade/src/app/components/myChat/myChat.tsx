@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import { FaCheck } from "react-icons/fa";
-import { FaXmark } from "react-icons/fa6";
 import { ImCross } from "react-icons/im";
 import './myChat.css'
 import { Feedback } from '../feedback/feedback';

@@ -35,6 +35,7 @@ export default function Page() {
   const [newSearch, setNewSearch] = useState('');
   const [showSort, setShowSort] = useState(false);
   const [sortCategory, setSortCategory] = useState('');
+  const [cutOff, setCutOff] = useState(8);
 
   const handleSearch = () => {
     const queryString = new URLSearchParams({ q: newSearch }).toString(); // Construct query string
@@ -124,7 +125,7 @@ export default function Page() {
       </div>
       <div id="resultsUsers">
         {
-          users.map((user: User) => {
+          users.slice(0, cutOff).map((user: User) => {
             let filtServ = services.filter(service => service.users.includes(user._id))
             let serv = filtServ.length ? filtServ[0].service : user.services[0]
             return <UserItem
@@ -138,7 +139,7 @@ export default function Page() {
             />
           })}
       </div>
-      <button id="resultsButton">Load More</button>
+      <button id="resultsButton" onClick={() => setCutOff(cutOff + 4)}>Load More</button>
       <MyFooter />
     </>
   );
