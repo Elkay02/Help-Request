@@ -19,7 +19,7 @@ type User = {
   credit: number;
   peopleHelped: number;
   rating: number;
-  profilePicture: string;
+  picture: string;
 };
 
 type Service = {
@@ -133,7 +133,7 @@ export default function Page() {
               lastname={user.lastname}
               service={serv}
               rating={user.rating}
-              profile={user.profilePicture}
+              profile={user.picture}
               helped={user.peopleHelped}
             />
           })}

@@ -1,29 +1,24 @@
-import { connectToDatabase } from '../../../../lib';
+import { ObjectId } from 'mongodb';
+import { connectToDatabase } from '../../../../../lib/index';
 import { NextResponse } from "next/server";
 
-interface UserData {
-  request: string;
-  senderId: string;
-  receiverId: string;
-  state: 'pending';
-}
 
-export async function POST(req: Request) {
+export async function PUT(req: Request, context: any) {
   try {
-    const data = await req.json()
-
-
-    const { request, senderId, receiverId } = data as UserData;
-    const state = 'pending';
-
+    const { params } = context;
     const { db } = await connectToDatabase();
+    const messageCollection = db.collection("messages");
 
-    const userCollection = db.collection("messages");
-    const userData: UserData = { request, senderId, receiverId, state };
+    const messageId = new ObjectId(params.messageId);
 
-    const user = await userCollection.insertOne(userData);
 
-    return new NextResponse(JSON.stringify(user), {
+    const updatedMessage = await messageCollection.findOneAndUpdate(
+      { _id: messageId },
+      { $set: { state: 'accepted' } },
+      { returnOriginal: false }
+    );
+
+    return new NextResponse(JSON.stringify(updatedMessage), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
@@ -44,12 +39,24 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET() {
+export async function DELETE(req: Request, context: any) {
   try {
+    const { params } = context;
     const { db } = await connectToDatabase();
-    const data = await db.collection("messages").find().toArray();  // Example query
+    const messageCollection = db.collection("messages");
 
-    return NextResponse.json(data);
+    const messageId = new ObjectId(params.messageId);
+
+    // Update the array field using $push
+    const deleteddMessage = await messageCollection.deleteOne(
+      { _id: messageId }
+    );
+
+
+    return new NextResponse(JSON.stringify(deleteddMessage), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
   } catch (error) {
     console.error('Error details:', error);
     if (error instanceof Error) {

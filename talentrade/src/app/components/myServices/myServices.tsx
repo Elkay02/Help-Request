@@ -13,7 +13,7 @@ export default function MyServices({ services, id }: { services: string[], id: s
 
   useEffect(() => {
     fetchServices();
-  }, []);
+  }, [showAdd, showEdit]);
 
   async function fetchServices() {
     try {

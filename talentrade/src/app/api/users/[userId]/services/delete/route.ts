@@ -23,7 +23,6 @@ export async function DELETE(req: Request, context: any) {
     const userId = new ObjectId(params.userId);
     const user = await userCollection.findOne({ _id: userId })
     const service = user.services[index]
-    console.log('DELETE ~ service:', service);
     user.services.splice(index, 1)
 
     // Update the array field using $push

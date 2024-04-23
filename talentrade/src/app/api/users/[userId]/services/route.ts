@@ -30,16 +30,13 @@ export async function PUT(req: Request, context: any) {
     );
 
     const isService = await serviceCollection.findOne({ service: service })
-    console.log('PUT ~ isService:', isService);
 
     if (isService) {
-      console.log('PUT ~ isService passed');
       const updateService = await serviceCollection.findOneAndUpdate(
         { service: service },
         { $push: { users: userId } },
         { returnOriginal: false }
       )
-      console.log('PUT ~ isService:', updateService);
       return new NextResponse(JSON.stringify(updateService), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }

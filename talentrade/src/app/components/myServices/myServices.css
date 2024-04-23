@@ -24,3 +24,7 @@
 .myServicesIcon {
   margin-left: 1vw;
 }
+
+.myServicesIcon:hover {
+  cursor: pointer;
+}

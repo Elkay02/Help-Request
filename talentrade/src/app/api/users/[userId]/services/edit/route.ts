@@ -34,7 +34,6 @@ export async function PUT(req: Request, context: any) {
       { returnOriginal: false } // To return the updated document
     );
 
-    console.log('PUT ~ originalService:', originalService.services[0]);
     const updatedService = await serviceCollection.findOneAndUpdate(
       { service: originalService.services[0] },
       { $pull: { users: userId } },
@@ -42,16 +41,13 @@ export async function PUT(req: Request, context: any) {
     );
 
     const isService = await serviceCollection.findOne({ service: service })
-    console.log('PUT ~ isService:', isService);
 
     if (isService) {
-      console.log('PUT ~ isService passed');
       const updateService = await serviceCollection.findOneAndUpdate(
         { service: service },
         { $push: { users: userId } },
         { returnOriginal: false }
       )
-      console.log('PUT ~ isService:', updateService);
       return new NextResponse(JSON.stringify(updateService), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
@@ -65,11 +61,6 @@ export async function PUT(req: Request, context: any) {
         headers: { 'Content-Type': 'application/json' }
       });
     }
-
-    return new NextResponse(JSON.stringify(updatedUser), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
   } catch (error) {
     console.error('Error details:', error);
     if (error instanceof Error) {

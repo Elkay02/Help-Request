@@ -1,0 +1,99 @@
+#feedbackHead {
+  display: flex;
+}
+
+#feedbackImg {
+  width: 4vw;
+  margin-left: 2vw;
+}
+
+.feedbackH3 {
+  color: white;
+}
+
+#myRange {
+  width: 100%;
+  opacity: 0.7;
+  appearance: none;
+  background-color: white;
+}
+
+#myRange:hover {
+  opacity: 1;
+}
+
+#myRange::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  /* Set the width of the thumb */
+  height: 15px;
+  /* Set the height of the thumb */
+  background: rgba(221, 35, 30, 1);
+  /* Set the color of the thumb */
+  border-radius: 50%;
+  /* Ensure the thumb is circular */
+  cursor: pointer;
+  border: 2px solid white;
+  /* Add a border for better visibility */
+  margin-top: -6px;
+  /* Adjust the position of the thumb */
+}
+
+#myRange::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  /* Set the height of the line */
+  cursor: pointer;
+  background: white;
+  /* Set the color of the line */
+  border-radius: 0;
+  /* Ensure the line is straight */
+}
+
+.ticks {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+  margin-left: 6px;
+  margin-right: 2px;
+}
+
+.tick {
+  position: relative;
+  color: white;
+}
+
+.tick::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 5px;
+  background-color: white;
+}
+
+.feedbackLabel {
+  color: white;
+  margin-right: 1vw;
+}
+
+.feedbackInput {
+  border: 0;
+  margin: 1vh 0 0.5vh 0;
+  font-size: 2.5vh;
+  padding: 5px;
+  color: rgba(221, 30, 35, 1);
+  width: 15%;
+  margin-right: 0.5vw;
+}
+
+.feedbackInput::placeholder {
+  color: rgba(221, 30, 35, 1);
+}
+
+.feedbackInput:focus {
+  outline: none;
+}
