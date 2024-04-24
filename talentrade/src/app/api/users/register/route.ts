@@ -12,6 +12,7 @@ interface UserData {
   password: string;
   picture: string; // Ensure picture property is always present
   services: string[];
+  description: string;
   credit: number;
   rating: number;
   peopleHelped: number;
@@ -27,6 +28,7 @@ export async function POST(req: Request) {
 
     // Assign default values
     const services: string[] = [];
+    const description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse ut eveniet commodi eaque doloremque quia non nesciunt veniam unde rerum. Consequuntur pariatur minus sequi neque sit et, eos possimus quam."
     const credit = 0;
     const rating = 0;
     const peopleHelped = 0;
@@ -54,6 +56,7 @@ export async function POST(req: Request) {
       password,
       picture: picture || defaultPicture, // Set picture to default if not provided
       services,
+      description,
       credit,
       rating,
       peopleHelped

@@ -51,7 +51,7 @@ export default function MyHeader() {
           }
           {isLoggedIn &&
             <Link href={'/662624f03119c7fe982964e6/profile'}>
-              <img src="/picture7.png" alt="" id='headerImg' />
+              <img src="/panda.png" alt="" id='headerImg' />
             </Link>
           }
         </div>

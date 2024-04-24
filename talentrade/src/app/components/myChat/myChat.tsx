@@ -4,12 +4,15 @@ import { FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import './myChat.css'
 import { Feedback } from '../feedback/feedback';
+import React from 'react';
 
 export default function MyChat({ id }: { id: string }) {
 
   const [messages, setMessages] = useState<any[]>([]);
   const [completed, setCompleted] = useState<any[]>([]);
   const [cutOff, setCutOff] = useState(3);
+  const [pictures, setPictures] = useState<string[]>([]);
+
 
   async function fetchMessages() {
     try {
@@ -42,6 +45,15 @@ export default function MyChat({ id }: { id: string }) {
   useEffect(() => {
     fetchMessages();
   }, []);
+
+  useEffect(() => {
+    const fetchPicturesAsync = async () => {
+      const pics = await Promise.all(messages.slice(0, cutOff).map(msg => fetchPictures(msg.senderId)));
+      setPictures(pics);
+    };
+
+    fetchPicturesAsync();
+  }, [messages, cutOff]);
 
   async function handleAccept(messageId: any) {
     try {
@@ -80,21 +92,19 @@ export default function MyChat({ id }: { id: string }) {
       {completed.map((msg) => {
         return <Feedback pic={'/default.png'} helperId={msg.senderId} messageId={msg._id} />
       })}
-      <ul id='myChartUl'>
-        {messages.slice(0, cutOff).map(async (msg, index) => {
-          const pic = await fetchPictures(msg.senderId)
-          return (
-            <>
-              <li className='myChartIl'>
-                <img src={pic} alt="small profile" />
-                <h4>{msg.request}</h4>
-                <FaCheck id='myChartCheck' onClick={() => handleAccept(msg._id)} />
-                <ImCross id='myChartX' onClick={() => handleReject(msg._id)} />
-              </li>
-              <hr className='myChartHr' />
-            </>
-          );
-        })}
+      <ul id='myChatUl'>
+        {messages.slice(0, cutOff).map((msg, index) => (
+          <React.Fragment key={msg._id}>
+            <li className='myChatIl'>
+              <img src={pictures[index] || '/default.png'} alt="small profile" />
+              <h4>{msg.request}</h4>
+              <FaCheck id='myChatCheck' onClick={() => handleAccept(msg._id)} />
+              <ImCross id='myChatX' onClick={() => handleReject(msg._id)} />
+            </li>
+            <hr className='myChatHr' />
+          </React.Fragment>
+        )
+        )}
       </ul>
       <button className='profileCopmsButton' onClick={() => setCutOff(cutOff + 2)}>Load More</button>
     </div>

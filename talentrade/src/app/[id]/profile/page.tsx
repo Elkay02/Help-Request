@@ -16,7 +16,8 @@ export default function Page({ params }: { params: { id: string } }) {
     firstname: "default",
     lastname: "default",
     picture: "/default.png",
-    services: ['service 1'],
+    services: [],
+    description: "default default default",
     credit: 0,
     peopleHelped: 0,
     rating: 0,
@@ -69,7 +70,7 @@ export default function Page({ params }: { params: { id: string } }) {
       </div>
       <div id="profileRight">
         <img src={user.picture} alt="User Profile" id='profileImg' />
-        <p id="profileParag">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem neque voluptatem iusto vero modi qui ullam voluptate odit, enim eveniet delectus incidunt, eum autem eaque temporibus adipisci velit ipsam. Praesentium?</p>
+        <p id="profileParag">{user.description}</p>
         <div id='profileStats'>
           <h2>Statistics</h2>
           {isMyProfile &&

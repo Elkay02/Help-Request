@@ -1,8 +1,8 @@
-#myChartUl {
+#myChatUl {
   padding: 0 2vw;
 }
 
-.myChartIl {
+.myChatIl {
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -10,33 +10,33 @@
   margin: 2vh 0;
 }
 
-.myChartIl img {
+.myChatIl img {
   width: 4vw;
   height: 4vw;
   margin-right: 2vw;
   border-radius: 1000px;
 }
 
-.myChartIl h4 {
-  flex-grow: 1;
+.myChatIl h4 {
+  width: 40vw;
 }
 
-#myChartCheck {
+#myChatCheck {
   font-size: 2.25vh;
   margin-right: 1vw;
 }
 
-#myChartCheck:hover {
+#myChatCheck:hover {
   color: green;
   cursor: pointer;
 }
 
-#myChartX:hover {
+#myChatX:hover {
   color: rgba(221, 35, 30, 1);
   cursor: pointer;
 }
 
-.myChartHr {
+.myChatHr {
   width: 100%;
   background-color: black;
   border: 0;
